@@ -1,0 +1,27 @@
+
+plugins {
+	id "groovy"
+}
+
+repositories {
+	mavenCentral()
+}
+
+sourceSets {
+	main {
+		resources {
+			srcDirs = ["vars"]
+		}
+	}
+}
+
+configurations.all {
+	resolutionStrategy.cacheChangingModulesFor 1, 'minutes'
+}
+
+dependencies {
+	implementation localGroovy()
+
+	testImplementation "org.spockframework:spock-core:2.3-groovy-3.0"
+	testImplementation "com.papiocloud:shared-library-test-framework:+"
+}
