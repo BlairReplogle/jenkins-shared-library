@@ -10,6 +10,9 @@ def call(Map config = [:]) {
 	def homebrewPrefixBin = "${homebrewPrefix}/bin"
 	def homebrewPrefixSbin = "${homebrewPrefix}/sbin"
 
+	// Set auld LANG syne - put this somewhere else eventually... probably
+	env.LANG = "en_US.UTF-8"
+
 	// Set environment variable that persists across sh steps
 	env.PATH = "${homebrewPrefixBin}:${homebrewPrefixSbin}:${env.PATH}"
 
