@@ -19,12 +19,16 @@ def call() {
 	osInfo.isLinux = osName == 'linux'
 
 	// Print the osInfo object
-	println("=== OS Information ===")
-	println("OS Name: ${osInfo.name}")
-	println("OS Version: ${osInfo.version}")
-	println("Is Mac: ${osInfo.isMac}")
-	println("Is Linux: ${osInfo.isLinux}")
-	println("=======================")
+	def lines = []
+
+	lines << "=== OS Information ==="
+	lines << "OS Name: ${osInfo.name}"
+	lines << "OS Version: ${osInfo.version}"
+	lines << "Is Mac: ${osInfo.isMac}"
+	lines << "Is Linux: ${osInfo.isLinux}"
+	lines << "Path: ${env.PATH}"
+	lines << "======================="
+	println lines.join("\n")
 
 	return osInfo
 }
