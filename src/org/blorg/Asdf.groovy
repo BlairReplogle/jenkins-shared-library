@@ -10,9 +10,8 @@ class Asdf implements Serializable {
 
 	def check() {
 		def version = script.sh(
-			script: 'asdf --version',
-			returnStdout: true,
-			quiet: true
+			script: 'asdf --version 2>/dev/null',
+			returnStdout: true
 		).trim()
 
 		script.echo "✓ asdf is installed: ${version}"
@@ -36,9 +35,8 @@ class Asdf implements Serializable {
 	static String pluginList(script) {
 		if (cachedPluginList == null) {
 			cachedPluginList = script.sh(
-				script: 'asdf plugin list',
-				returnStdout: true,
-				quiet: true
+				script: 'asdf plugin list 2>/dev/null',
+				returnStdout: true
 			).trim()
 		}
 		return cachedPluginList
