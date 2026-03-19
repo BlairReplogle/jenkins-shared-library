@@ -7,7 +7,7 @@ class Homebrew implements Serializable {
 
 	Homebrew(script) {
 		this.script = script
-		this.homebrewPrefix = env.HOMEBREW_PREFIX ?: "/opt/homebrew"
+		this.homebrewPrefix = script.env.HOMEBREW_PREFIX ?: "/opt/homebrew"
 		this.homebrewPrefixBin = "${this.homebrewPrefix}/bin"
 	}
 
