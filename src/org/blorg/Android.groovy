@@ -10,7 +10,7 @@ class Android implements Serializable {
 
 	def check() {
 		// Check if ANDROID_HOME is set
-		androidHome = script.env.ANDROID_HOME
+		def androidHome = script.env.ANDROID_HOME
 		if (!androidHome) {
 			script.error("ANDROID_HOME environment variable is not set")
 		}
