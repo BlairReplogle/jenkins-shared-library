@@ -7,6 +7,6 @@ def call(String pluginName) {
 		error("Plugin name cannot be empty")
 	}
 
-	def asdf = Asdf(this)
+	def asdf = new Asdf(this)
 	asdf.checkPlugin(pluginName)
 }
