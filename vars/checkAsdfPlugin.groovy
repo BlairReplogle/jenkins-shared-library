@@ -8,5 +8,5 @@ def call(String pluginName) {
 	}
 
 	def asdf = new Asdf(this)
-	asdf.checkPlugin(pluginName)
+	asdf.checkAsdfPlugin(pluginName)
 }
