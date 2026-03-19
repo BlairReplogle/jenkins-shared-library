@@ -8,16 +8,17 @@ class Asdf implements Serializable {
 		this.script = script
 	}
 
-	def checkAsdf() {
+	def check() {
 		def version = script.sh(
 			script: 'asdf --version',
-			returnStdout: true
+			returnStdout: true,
+			quiet: true
 		).trim()
 
 		script.echo "✓ asdf is installed: ${version}"
 	}
 
-	def checkAsdfPlugin(String pluginName) {
+	def checkPlugin(String pluginName) {
 		if (!pluginName) {
 			script.error("Plugin name cannot be empty")
 		}
@@ -36,7 +37,8 @@ class Asdf implements Serializable {
 		if (cachedPluginList == null) {
 			cachedPluginList = script.sh(
 				script: 'asdf plugin list',
-				returnStdout: true
+				returnStdout: true,
+				quiet: true
 			).trim()
 		}
 		return cachedPluginList

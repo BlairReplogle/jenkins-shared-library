@@ -7,7 +7,7 @@ import org.blorg.Asdf
 
 def call(Map options = [:]) {
 	def asdf = new Asdf(this)
-	asdf.checkAsdf()
+	asdf.check()
 
 	if (options.containsKey('plugins') && (options.plugins instanceof List)) {
 		options.plugins.each { plugin ->
