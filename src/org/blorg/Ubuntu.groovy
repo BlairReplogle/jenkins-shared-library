@@ -8,7 +8,7 @@ class Ubuntu implements Serializable {
 	}
 
 	def check() {
-		def path = env.PATH
+		def path = script.env.PATH
 
 		def usrLocalBin = "/usr/local/bin"
 		if (!path.contains(usrLocalBin)) {
@@ -16,12 +16,12 @@ class Ubuntu implements Serializable {
 		}
 
 		def lang = "en_US.UTF-8"
-		if (env.LANG != lang) {
+		if (script.env.LANG != lang) {
 			script.error "LANG environment variable not set to ${lang}"
 		}
 
 		def sandbox = "/opt/chromium-sandbox/chrome-sandbox"
-		if (env.CHROME_DEVEL_SANDBOX != sandbox) {
+		if (script.env.CHROME_DEVEL_SANDBOX != sandbox) {
 			script.error "CHROME_DEVEL_SANDBOX environment variable not set to ${sandbox}"
 		}
 

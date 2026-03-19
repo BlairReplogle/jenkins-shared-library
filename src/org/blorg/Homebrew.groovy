@@ -13,7 +13,7 @@ class Homebrew implements Serializable {
 
 	def setup() {
 		// Set auld LANG syne - put this somewhere else eventually... probably
-		env.LANG = "en_US.UTF-8"
+		script.env.LANG = "en_US.UTF-8"
 
 		// Set environment variable that persists across sh steps
 		script.env.PATH = "${homebrewPrefixBin}:${script.env.PATH}"
