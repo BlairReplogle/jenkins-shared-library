@@ -14,7 +14,7 @@ class Asdf implements Serializable {
 			returnStdout: true
 		).trim()
 
-		echo "✓ asdf is installed: ${version}"
+		script.echo "✓ asdf is installed: ${version}"
 	}
 
 	def checkAsdfPlugin(String pluginName) {
