@@ -24,6 +24,7 @@ pipeline {
 		}
 		stage('Mac Tests') {
 			steps {
+				checkHomebrew()
 				checkAsdf(
 					plugins: [
 						"awscli",
@@ -34,6 +35,7 @@ pipeline {
 						"terraform"
 					]
 				)
+				checkAndroid()
 			}
 		}
 	}
