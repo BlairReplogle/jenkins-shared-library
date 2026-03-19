@@ -1,0 +1,73 @@
+#!/usr/bin/env groovy
+
+@Library('jenkins-shared-library') _
+
+pipeline {
+	agent {
+		label 'macos-latest'
+	}
+	parameters {
+		string(name: 'NODE_LABEL_MOBILE', defaultValue: 'macos-latest', description: 'Mac node label')
+		string(name: 'NODE_LABEL_WEB', defaultValue: 'ubuntu-latest', description: 'Web node label')
+	}
+	options {
+		ansiColor('xterm')
+		disableConcurrentBuilds(abortPrevious: true)
+		skipStagesAfterUnstable()
+	}
+	stages {
+		stage('run') {
+			parallel {
+				stage('Mac Setup') {
+					steps {
+						setupHomebrew()
+						setupAsdf()
+						setupAndroid()
+					}
+				}
+				stage('Ubuntu Setup') {
+					agent {
+						label params.NODE_LABEL_WEB
+					}
+					steps {
+						setupUbuntu()
+						setupAsdf()
+					}
+				}
+			}
+			parallel {
+				stage('Mac Tests') {
+					steps {
+						checkAsdf(
+							plugins: [
+								"awscli",
+								"java",
+								"nodejs",
+								"python",
+								"ruby",
+								"terraform"
+							]
+						)
+					}
+				}
+				stage('Ubuntu Tests') {
+					agent {
+						label params.NODE_LABEL_WEB
+					}
+					steps {
+						checkAsdf(
+							plugins: [
+								"awscli",
+								"java",
+								"nodejs",
+								"python",
+								"ruby",
+								"terraform"
+							]
+						)
+					}
+				}
+			}
+		}
+	}
+}
