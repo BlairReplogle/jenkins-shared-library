@@ -130,13 +130,12 @@ class Xcode implements Serializable {
 
 			output.split('\n').each { line ->
 				// Parse lines from xcodes installed output
-				// Expected format: /Applications/Xcode_XX.X.app or similar
-				line = line.trim()
-				if (line && line.startsWith('/')) {
-					// Handle cases where the path might have additional info
-					def pathPart = line.split(/\s+/)[0]
-					if (pathPart.contains('.app')) {
-						paths.add(pathPart)
+				// Extract substring from "/" to end of line to get the path
+				def slashIndex = line.indexOf('/')
+				if (slashIndex >= 0) {
+					def path = line.substring(slashIndex).trim()
+					if (path) {
+						paths.add(path)
 					}
 				}
 			}
