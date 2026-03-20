@@ -2,10 +2,19 @@ package org.blorg
 
 class Android implements Serializable {
 	private def script
+	private def androidHome
 	private List<String> outputs = []
 
 	Android(script) {
 		this.script = script
+		this.androidHome = script.env.ANDROID_HOME ?: "${script.env.HOME}/Library/Android/sdk"
+	}
+
+	def setup() {
+		script.env.ANDROID_HOME = androidHome
+		script.env.PATH = "${androidHome}/cmdline-tools/latest/bin:${script.env.PATH}"
+		script.env.PATH = "${androidHome}/platform-tools:${script.env.PATH}"
+		script.env.PATH = "${androidHome}/emulator:${script.env.PATH}"
 	}
 
 	def check() {

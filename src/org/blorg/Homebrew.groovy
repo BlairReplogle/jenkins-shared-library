@@ -12,7 +12,7 @@ class Homebrew implements Serializable {
 	}
 
 	def setup() {
-		// Set auld LANG syne - put this somewhere else eventually... probably
+		// Set auld LANG syne
 		script.env.LANG = "en_US.UTF-8"
 
 		// Set environment variable that persists across sh steps
