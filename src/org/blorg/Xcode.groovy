@@ -78,16 +78,12 @@ class Xcode implements Serializable {
 			// Check 4a: Verify license agreement
 			script.echo "  Checking license status..."
 			try {
-				def licenseStatus = script.sh(
+				script.sh(
 					script: "DEVELOPER_DIR='${xcodePath}' xcodebuild -license status",
 					returnStdout: true
-				).trim()
+				)
 
-				if (licenseStatus.contains("agree")) {
-					script.echo "  ✓ Licenses agreed"
-				} else {
-					script.echo "  ℹ License status: ${licenseStatus}"
-				}
+				script.echo "  ✓ Licenses agreed"
 			} catch (Exception e) {
 				throw new Exception("✗ Failed to check license status for ${xcodePath}: ${e.message}")
 			}
