@@ -1,4 +1,6 @@
-class Xcode {
+package org.blorg
+
+class Xcode implements Serializable {
 	def script
 
 	Xcode(script) {
