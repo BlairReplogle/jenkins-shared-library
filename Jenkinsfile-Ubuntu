@@ -23,6 +23,7 @@ pipeline {
 		}
 		stage('Ubuntu Tests') {
 			steps {
+				checkUbuntu()
 				checkAsdf(
 					plugins: [
 						"awscli",
