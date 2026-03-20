@@ -16,7 +16,7 @@ pipeline {
 		skipStagesAfterUnstable()
 	}
 	stages {
-		stage('run') {
+		stage('setup') {
 			parallel {
 				stage('Mac Setup') {
 					steps {
@@ -35,6 +35,8 @@ pipeline {
 					}
 				}
 			}
+		}
+		stage('run') {
 			parallel {
 				stage('Mac Tests') {
 					steps {
