@@ -11,7 +11,7 @@ class Asdf implements Serializable {
 
 		// Determine asdf data directory
 		// Use ASDF_DATA_DIR if it exists, otherwise default to $HOME/.asdf
-		def asdfDataDir = script.env.ASDF_DATA_DIR ?: "$HOME/.asdf"
+		def asdfDataDir = script.env.ASDF_DATA_DIR ?: "${script.env.HOME}/.asdf"
 		this.asdfDataDirShims = "${asdfDataDir}/shims"
 	}
 
