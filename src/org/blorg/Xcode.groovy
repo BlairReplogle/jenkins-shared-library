@@ -104,6 +104,27 @@ class Xcode implements Serializable {
 			} catch (Exception e) {
 				throw new Exception("✗ iphoneos SDK not available for ${xcodePath}: ${e.message}")
 			}
+
+			// Check 4d: Verify iOS simulator runtimes are available
+			script.echo "  Checking iOS simulator runtimes..."
+			try {
+				def runtimes = script.sh(
+					script: "DEVELOPER_DIR='${xcodePath}' xcrun simctl list runtimes | grep -i 'ios' | grep -i 'available'",
+					returnStdout: true
+				).trim()
+
+				if (runtimes) {
+					def runtimeCount = runtimes.split('\n').size()
+					script.echo "  ✓ Found ${runtimeCount} available iOS simulator runtime(s)"
+					runtimes.split('\n').each { runtime ->
+						script.echo "    - ${runtime.trim()}"
+					}
+				} else {
+					throw new Exception("No available iOS simulator runtimes found")
+				}
+			} catch (Exception e) {
+				throw new Exception("✗ iOS simulator runtimes not available for ${xcodePath}: ${e.message}")
+			}
 		}
 
 		script.echo "\n✓ All Xcode checks passed!"
