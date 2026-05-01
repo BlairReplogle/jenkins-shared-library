@@ -4,6 +4,10 @@ Jenkins shared library to add steps to configure an executors environment for di
 
 This is a simplified version of the template repository found [here](https://github.com/papiocloudsoftware/jenkins-shared-library-template)
 
+Information about setting up build executors:
+- [macos-latest](docs/macos-latest.md)
+- [ubuntu-latest](docs/ubuntu-latest.md)
+
 ## ASDF Install
 
 This Jenkins step runs `asdf install` to install all tools and versions specified in the repository's `.tool-versions` file.
