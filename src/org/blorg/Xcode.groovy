@@ -109,7 +109,7 @@ class Xcode implements Serializable {
 			script.echo "  Checking iOS simulator runtimes..."
 			try {
 				def runtimes = script.sh(
-					script: "DEVELOPER_DIR='${xcodePath}' xcrun simctl list runtimes | grep -i 'ios' | grep -i 'available'",
+					script: "DEVELOPER_DIR='${xcodePath}' xcrun simctl list runtimes | grep -i 'ios' | grep -iv 'unavailable'",
 					returnStdout: true
 				).trim()
 
